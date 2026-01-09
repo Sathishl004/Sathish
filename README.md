@@ -30,4 +30,20 @@ This repository contains automation workflows built using n8n.
 
 ## About Me
 Entry-level Automation Engineer transitioning into AI & no-code workflows.
+Under Skills:
+## Sample Workflows
+- Invoice OCR automation using Google Vision API
+- WhatsApp auto-reply bot with webhook triggers
+- Google Sheets + API data sync automation
+
+## Tools & Tech
+- n8n
+- REST APIs
+- Webhooks
+- Google Cloud APIs
+- OAuth 2.0
+- JSON / HTTP Requests
+
+
+
 Actively looking for freelance and junior automation roles.
