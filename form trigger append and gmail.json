@@ -1,0 +1,210 @@
+{
+  "name": "form trigger append and gmail",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Testing Form",
+        "formDescription": "This is an testing form you can fill the given details.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "First Name",
+              "placeholder": "Your_name"
+            },
+            {
+              "fieldLabel": "E-mail",
+              "fieldType": "email",
+              "placeholder": "Your_email"
+            },
+            {
+              "fieldLabel": "Date",
+              "fieldType": "date"
+            },
+            {
+              "fieldLabel": "Phone_Number",
+              "fieldType": "number",
+              "placeholder": "Phone_Number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -352,
+        -368
+      ],
+      "id": "85da545c-7093-4bc8-b310-40078e45ae30",
+      "name": "On form submission",
+      "webhookId": "be371bd3-aa60-4d76-8f90-a2c679294f5e"
+    },
+    {
+      "parameters": {
+        "sendTo": "sstuard90@gmail.com",
+        "subject": "Goolesheet",
+        "message": "check the Google sheet for the update!",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        32,
+        -368
+      ],
+      "id": "0c4632cc-33b9-4a08-a127-9d662a966b36",
+      "name": "Send a message",
+      "webhookId": "dd78b12b-5ae6-400f-ac7f-d7bd9ee4dacf",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "c49y0N0WSDfGTyc0",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1EXJU44VzDJ8Xy2oLay8rqytzaO4XsCYkMrXaeok1jvY",
+          "mode": "list",
+          "cachedResultName": "testing form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EXJU44VzDJ8Xy2oLay8rqytzaO4XsCYkMrXaeok1jvY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "testform",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EXJU44VzDJ8Xy2oLay8rqytzaO4XsCYkMrXaeok1jvY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "submittedAt": "={{ $json.submittedAt }}",
+            "formMode": "={{ $json.formMode }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Phone_Number",
+              "displayName": "Phone_Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "formMode",
+              "displayName": "formMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -160,
+        -368
+      ],
+      "id": "b03c19ad-2ac0-4a6c-adfb-0a053ee31dbd",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ObbT1Bv2Vfpy4R7l",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fb6e6238-9ce5-4746-9635-b52c33baf4d3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ec37d409862604d0262f64ac0e0777474559d40693efe5bae32d4b688b0de829"
+  },
+  "id": "EM1XezcjUTJ4srnN",
+  "tags": []
+}

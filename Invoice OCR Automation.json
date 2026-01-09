@@ -1,0 +1,820 @@
+{
+  "name": "Invoice OCR Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1tRSNXskQ7B_CWrEKYmKEHEwDp90jsaGs",
+          "mode": "list",
+          "cachedResultName": "Unprocessed invoices",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1tRSNXskQ7B_CWrEKYmKEHEwDp90jsaGs"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        -832
+      ],
+      "id": "bee3d8cd-a8b1-4e3d-9e70-c60512ece0ca",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HhTYWALKDvadZYpJ",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -592,
+        -832
+      ],
+      "id": "c8d40787-f901-4296-822e-eca014e287f7",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HhTYWALKDvadZYpJ",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -448,
+        -832
+      ],
+      "id": "57e023ac-8ff3-4f1f-a9bb-248c5fd420d8",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e81f1e1a-a030-4055-9d72-2244ca09556d",
+                    "leftValue": "={{ $('Download file').item.json.fileExtension }}",
+                    "rightValue": "jpg",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "JPG"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "07676065-b463-4b2e-bfcf-e148fea17661",
+                    "leftValue": "={{ $('Download file').item.json.fileExtension }}",
+                    "rightValue": "png",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PNG"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8e83e6dc-7367-4f72-910b-588ad386d16b",
+                    "leftValue": "={{ $('Download file').item.json.fileExtension }}",
+                    "rightValue": "pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PDF"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -272,
+        -848
+      ],
+      "id": "2bcb885b-a4aa-42b9-86a2-df3558942113",
+      "name": "Type of file jpg png"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.extracted_text_pdf ?? $json.extracted_text_image}}",
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"date\": {\n      \"type\": \"string\",\n      \"description\": \"Extract the transaction date from the receipt. Look for dates in various formats\"\n    },\n    \"receiptId\": {\n      \"type\": \"string\",\n      \"description\": \"Extract the receipt number, invoice number, or transaction ID\"\n    },\n    \"vendor\": {\n      \"type\": \"string\",\n      \"description\": \"Extract the business name or merchant name from the receipt\"\n    },\n    \"address\": {\n      \"type\": \"string\",\n      \"description\": \"Extract the vendor or merchant address from the receipt\"\n    },\n    \"category\": {\n      \"type\": \"string\",\n      \"description\": \"Classify the expense into one of the following Categories: Office Supplies, Travel, Meals & Entertainment, Equipment & Hardware, Professional Services, Utilities, Marketing & Advertising, Rent & Facilities, Insurance, Taxes & Licenses, Software & Subscriptions, Telecommunications, Vehicle & Transportation, Medical & Healthcare, Training & Education, Maintenance & Repairs, Other\"\n    },\n    \"expenseType\": {\n      \"type\": \"string\",\n      \"description\": \"Extract or infer a more specific type of expense\"\n    },\n    \"description\": {\n      \"type\": \"string\",\n      \"description\": \"Provide a detailed description of the items purchased or service received\"\n    },\n    \"amount\": {\n      \"type\": \"number\",\n      \"description\": \"Extract the subtotal or pre-tax amount from the receipt\"\n    },\n    \"gstHst\": {\n      \"type\": \"number\",\n      \"description\": \"Extract the GST or HST amount paid. Look for 'GST' or 'HST' labels\"\n    },\n    \"pst\": {\n      \"type\": \"number\",\n      \"description\": \"Extract the PST amount. Only applicable in BC (7%) or other provinces\"\n    },\n    \"totalTax\": {\n      \"type\": \"number\",\n      \"description\": \"Extract or calculate total taxes paid (GST/HST + PST if applicable)\"\n    },\n    \"totalDue\": {\n      \"type\": \"number\",\n      \"description\": \"Extract the total amount due including all taxes. Look for 'Total Due', 'Grand Total', 'Amount Due', or 'Total' on the receipt\"\n    },\n    \"paymentMethod\": {\n      \"type\": \"string\",\n      \"description\": \"Identify payment method. Return one of: Corporate Card, Personal Card, Cash, Cheque, E-Transfer, Other\"\n    },\n   \"receiptLocation\": {\n  \"type\": \"string\",\n  \"description\": \"Auto-populated by workflow. Return empty string.\"\n}\n  },\n  \"required\": [\"date\", \"vendor\", \"category\", \"expenseType\", \"totalDue\", \"amount\", \"gstHst\", \"pst\", \"totalTax\"]\n}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        640,
+        -1056
+      ],
+      "id": "4c61e42e-8895-4ca6-b79d-a3bc46064564",
+      "name": "Information Extractor"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1oXTBZfzziC-CNz9iFLPw1fVwY7e5AadTPqeuQlL86YU",
+          "mode": "list",
+          "cachedResultName": "Business expen",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oXTBZfzziC-CNz9iFLPw1fVwY7e5AadTPqeuQlL86YU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oXTBZfzziC-CNz9iFLPw1fVwY7e5AadTPqeuQlL86YU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $json.output.date }}",
+            "Processeddate": "={{ $now.toFormat('dd/MM/yyyy') }}",
+            "Vendor": "={{ $json.output.vendor }}",
+            "Receipt id": "={{ $json.output.receiptId }}",
+            "Status": "Processed",
+            "Address": "={{ $json.output.address }}",
+            "Category": "={{ $json.output.category }}",
+            "Expense type": "={{ $json.output.expenseType }}",
+            "Description": "={{ $json.output.description }}",
+            "Amount": "={{ $json.output.amount }}",
+            "GST/HST": "={{ $json.output.gstHst }}",
+            "PST": "={{ $json.output.pst }}",
+            "Totaltax": "={{ $json.output.totalTax }}",
+            "Totaldue": "={{ $json.output.totalDue }}",
+            "Payment method": "={{ $json.output.paymentMethod || 'Online' }}",
+            "Receipt location": "={{ $json.output.receiptLocation }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Processeddate",
+              "displayName": "Processeddate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Vendor",
+              "displayName": "Vendor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Receipt id",
+              "displayName": "Receipt id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Expense type",
+              "displayName": "Expense type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Description",
+              "displayName": "Description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Amount",
+              "displayName": "Amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "GST/HST",
+              "displayName": "GST/HST",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PST",
+              "displayName": "PST",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Totaltax",
+              "displayName": "Totaltax",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Totaldue",
+              "displayName": "Totaldue",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Payment method",
+              "displayName": "Payment method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Receipt location",
+              "displayName": "Receipt location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        960,
+        -1056
+      ],
+      "id": "1cf3818e-da70-46ec-983e-83f20999f7bc",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ObbT1Bv2Vfpy4R7l",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Download file').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1mKBpHHCGqRNrWc3bfJsOMiN9Qw8i8_I_",
+          "mode": "list",
+          "cachedResultName": "Processed invoices",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1mKBpHHCGqRNrWc3bfJsOMiN9Qw8i8_I_"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1136,
+        -1056
+      ],
+      "id": "539a9bee-6869-4532-b6b4-e69101380081",
+      "name": "Move to processed",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HhTYWALKDvadZYpJ",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "newUpdatedFileName": "={{ $('Append row in sheet').item.json.Vendor }}__{{ $('Append row in sheet').item.json['Receipt id'] }}__{{ $('Append row in sheet').item.json.Date }}_${{ $('Append row in sheet').item.json.Totaldue }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1296,
+        -1040
+      ],
+      "id": "11fd4ec4-85a9-4a13-8881-5e7c5b308749",
+      "name": "Update file name",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HhTYWALKDvadZYpJ",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        656,
+        -880
+      ],
+      "id": "725ba83c-ebf5-4fe1-a48f-d019686f36f5",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "P4AtzZyaEM25S1pS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://vision.googleapis.com/v1/images:annotate",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "AIzaSyAfWedAAaTEfes0OYneGDejtkfB_4yOa3o"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"requests\": [\n    {\n      \"image\": {\n        \"content\": \"{{ $('Extract from File').item.json.data }}\"\n      },\n      \"features\": [\n        {\n          \"type\": \"DOCUMENT_TEXT_DETECTION\"\n        }\n      ]\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -48,
+        -960
+      ],
+      "id": "2c234df9-4ad6-40cc-a9ef-77cd5d6cda4d",
+      "name": "OCR api--Image"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://vision.googleapis.com/v1/files:annotate",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "AIzaSyAfWedAAaTEfes0OYneGDejtkfB_4yOa3o"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"requests\": [\n    {\n      \"inputConfig\": {\n        \"content\": \"{{ $('Extract from File').item.json.data }}\",\n        \"mimeType\": \"application/pdf\"\n      },\n      \"features\": [\n        {\n          \"type\": \"DOCUMENT_TEXT_DETECTION\"\n        }\n      ]\n    }\n  ]\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -48,
+        -736
+      ],
+      "id": "73dfe693-6317-4d9a-8c34-55ff4b327fcb",
+      "name": "OCR api--pdf"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1f4bc93a-c87b-409d-9ec3-19246f41dde9",
+              "name": "extracted_text_pdf",
+              "value": "={{ $json.aggregatedText }}",
+              "type": "string"
+            },
+            {
+              "id": "8bfdce21-1266-4c39-a2ac-34e1887b2356",
+              "name": "extracted_text_image",
+              "value": "={{ $json.responses[0].fullTextAnnotation.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        -976
+      ],
+      "id": "cd39240f-c190-4393-bd2f-04a166c97629",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aggregate OCR text from all pages\nlet aggregatedText = '';\nlet pageTexts = [];\n\nfor (const item of $input.all()) {\n  try {\n    // Correct path: item.json.responses (not item.json[0].responses)\n    const responses = item.json.responses[0].responses;\n    \n    // Loop through each page\n    for (const page of responses) {\n      if (page.fullTextAnnotation && page.fullTextAnnotation.text) {\n        const pageNumber = page.context?.pageNumber || pageTexts.length + 1;\n        const pageText = page.fullTextAnnotation.text;\n        \n        // Store individual page text\n        pageTexts.push({\n          pageNumber: pageNumber,\n          text: pageText\n        });\n        \n        // Aggregate all text\n        aggregatedText += page.fullTextAnnotation.text + '\\n\\n';\n      }\n    }\n  } catch (error) {\n    console.error('Error processing item:', error);\n    // Optional: Add debug info\n    console.log({\n      debug: JSON.stringify(item.json, null, 2)\n    });\n  }\n}\n\n// Return only the aggregated result\nreturn [{\n  json: {\n    aggregatedText: aggregatedText.trim(),\n    totalPages: pageTexts.length,\n    pages: pageTexts\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        144,
+        -720
+      ],
+      "id": "c36acda8-d30a-42af-a0dc-1ba93f8252a2",
+      "name": "Agg text"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "1oXTBZfzziC-CNz9iFLPw1fVwY7e5AadTPqeuQlL86YU",
+          "mode": "list",
+          "cachedResultName": "Business expen",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oXTBZfzziC-CNz9iFLPw1fVwY7e5AadTPqeuQlL86YU/edit?usp=drivesdk"
+        },
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1QCaWh0LhUDXVhaSGgPU4b1i2v8eVf1a5",
+          "mode": "list",
+          "cachedResultName": "Error invoices",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1QCaWh0LhUDXVhaSGgPU4b1i2v8eVf1a5"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        672,
+        -624
+      ],
+      "id": "0cb67ab1-8493-45da-809d-3ddcca6fe3cf",
+      "name": "Move file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HhTYWALKDvadZYpJ",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "19c485dc-981d-4281-aec4-de167f591c1d",
+              "leftValue": "={{ $json.extracted_text_pdf || $json.extracted_text_image}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        304,
+        -832
+      ],
+      "id": "79b123b6-865b-4190-8e93-ab66199ce9e9",
+      "name": "Check error"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Type of file jpg png",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Type of file jpg png": {
+      "main": [
+        [
+          {
+            "node": "OCR api--Image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "OCR api--Image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "OCR api--pdf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Move to processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move to processed": {
+      "main": [
+        [
+          {
+            "node": "Update file name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OCR api--Image": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OCR api--pdf": {
+      "main": [
+        [
+          {
+            "node": "Agg text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Check error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agg text": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check error": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Move file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "85ba401d-4eaa-4925-91d5-c8ab6e8782c6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ec37d409862604d0262f64ac0e0777474559d40693efe5bae32d4b688b0de829"
+  },
+  "id": "HH1zN4VgeR48rOHX",
+  "tags": []
+}
