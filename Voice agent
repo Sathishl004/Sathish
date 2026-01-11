@@ -1,0 +1,1619 @@
+{
+  "name": "Retell voice agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "c701ecfa-76d9-42de-912f-e64f6f31e4f3",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -480,
+        -128
+      ],
+      "id": "4e0c790b-4cc5-4926-b3de-09e1234e9aa0",
+      "name": "Webhook",
+      "webhookId": "c701ecfa-76d9-42de-912f-e64f6f31e4f3"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1hE7fR9DLKz-4-wjtH6jCb29RBmRWG4cSMYfonywXeXg",
+          "mode": "list",
+          "cachedResultName": "Retell voice agent",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hE7fR9DLKz-4-wjtH6jCb29RBmRWG4cSMYfonywXeXg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hE7fR9DLKz-4-wjtH6jCb29RBmRWG4cSMYfonywXeXg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.body.args.name }}",
+            "preferred Time": "={{ $json.body.args.preferred_time }}",
+            "Phone number": "={{ $json.body.args.phone_number }}",
+            "Appliance": "={{ $json.body.args.appliance }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone number",
+              "displayName": "Phone number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Appliance",
+              "displayName": "Appliance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "preferred Time",
+              "displayName": "preferred Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -272,
+        -128
+      ],
+      "id": "a5aba440-18e0-4e27-a502-597e6b7d7632",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ObbT1Bv2Vfpy4R7l",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "branky-christie-feverless.ngrok-free.dev",
+            "user-agent": "axios/1.13.2",
+            "content-length": "20768",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-forwarded-for": "100.20.5.228",
+            "x-forwarded-host": "branky-christie-feverless.ngrok-free.dev",
+            "x-forwarded-proto": "https",
+            "x-retell-signature": "v=1768142486504,d=48b1a1c38b1056cb9bf413d21d2b7f47c1874b7e5b30b9277b20279d3352262f"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "call": {
+              "call_id": "call_faa7a26ea1d31e72a69c077de27",
+              "call_type": "web_call",
+              "agent_id": "agent_2df7647860c6fbac5f6e7e1d9c",
+              "agent_version": 0,
+              "agent_name": "AI voice agent for  Apex Appliance Repairs",
+              "collected_dynamic_variables": {
+                "current_agent_state": "Appointment_Booking",
+                "previous_agent_state": "Intro"
+              },
+              "call_status": "ongoing",
+              "start_timestamp": 1768142433244,
+              "transcript": "Agent: Hi, thanks for calling our appliance repair service. This is Alex—how can I help you today?\nUser: For an appointment\nAgent: Sure, I can help with that. What appliance are you having trouble with?\nUser: Oven.\nAgent: Got it, an oven. When would you prefer a technician to come by?\nUser: Twelfth of Jan.\nAgent: Alright, noted for the 12th of January. May I have your name, please?\nUser: (inaudible speech)\nAgent: And what's the best number to reach you at?\nUser: Nine zero nine two one six eight seven four.\nAgent: Thank you! Let me confirm the details. You’re requesting service for an oven, and you’d prefer the technician to come on the 12th of January. The phone number I have is 909-216-8742. Could you please confirm your name for me?\nUser: Two and\n",
+              "transcript_object": [
+                {
+                  "role": "agent",
+                  "content": "Hi, thanks for calling our appliance repair service. This is Alex—how can I help you today?",
+                  "words": [
+                    {
+                      "word": "Hi, ",
+                      "start": 0.417708251953125,
+                      "end": 0.68285986328125
+                    },
+                    {
+                      "word": "thanks ",
+                      "start": 0.68285986328125,
+                      "end": 0.948011474609375
+                    },
+                    {
+                      "word": "for ",
+                      "start": 0.948011474609375,
+                      "end": 1.213162841796875
+                    },
+                    {
+                      "word": "calling ",
+                      "start": 1.213162841796875,
+                      "end": 1.478314453125
+                    },
+                    {
+                      "word": "our ",
+                      "start": 1.478314453125,
+                      "end": 1.7434658203125
+                    },
+                    {
+                      "word": "appliance ",
+                      "start": 1.7434658203125,
+                      "end": 2.008617431640625
+                    },
+                    {
+                      "word": "repair ",
+                      "start": 2.008617431640625,
+                      "end": 2.27376904296875
+                    },
+                    {
+                      "word": "service. ",
+                      "start": 2.27376904296875,
+                      "end": 2.53892041015625
+                    },
+                    {
+                      "word": "This ",
+                      "start": 2.53892041015625,
+                      "end": 2.804072021484375
+                    },
+                    {
+                      "word": "is ",
+                      "start": 2.804072021484375,
+                      "end": 3.069223388671875
+                    },
+                    {
+                      "word": "Alex—how ",
+                      "start": 3.069223388671875,
+                      "end": 3.334375
+                    },
+                    {
+                      "word": "can ",
+                      "start": 3.334375,
+                      "end": 3.599526611328125
+                    },
+                    {
+                      "word": "I ",
+                      "start": 3.599526611328125,
+                      "end": 3.864677978515625
+                    },
+                    {
+                      "word": "help ",
+                      "start": 3.864677978515625,
+                      "end": 4.12982958984375
+                    },
+                    {
+                      "word": "you ",
+                      "start": 4.12982958984375,
+                      "end": 4.39498095703125
+                    },
+                    {
+                      "word": "today?",
+                      "start": 4.39498095703125,
+                      "end": 4.660132568359375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 0
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "For an appointment",
+                  "words": [
+                    {
+                      "word": "For ",
+                      "start": 6.776999999999999,
+                      "end": 7.0969999999999995
+                    },
+                    {
+                      "word": "an ",
+                      "start": 7.0969999999999995,
+                      "end": 7.257
+                    },
+                    {
+                      "word": "appointment",
+                      "start": 7.257,
+                      "end": 7.737
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "Sure, I can help with that. What appliance are you having trouble with?",
+                  "words": [
+                    {
+                      "word": "Sure, ",
+                      "start": 9.205708251953125,
+                      "end": 9.47085986328125
+                    },
+                    {
+                      "word": "I ",
+                      "start": 9.47085986328125,
+                      "end": 9.736011474609375
+                    },
+                    {
+                      "word": "can ",
+                      "start": 9.736011474609375,
+                      "end": 10.001162841796875
+                    },
+                    {
+                      "word": "help ",
+                      "start": 10.001162841796875,
+                      "end": 10.266314453125
+                    },
+                    {
+                      "word": "with ",
+                      "start": 10.266314453125,
+                      "end": 10.5314658203125
+                    },
+                    {
+                      "word": "that. ",
+                      "start": 10.5314658203125,
+                      "end": 10.796617431640625
+                    },
+                    {
+                      "word": "What ",
+                      "start": 10.796617431640625,
+                      "end": 11.06176904296875
+                    },
+                    {
+                      "word": "appliance ",
+                      "start": 11.06176904296875,
+                      "end": 11.32692041015625
+                    },
+                    {
+                      "word": "are ",
+                      "start": 11.32692041015625,
+                      "end": 11.592072021484375
+                    },
+                    {
+                      "word": "you ",
+                      "start": 11.592072021484375,
+                      "end": 11.857223388671875
+                    },
+                    {
+                      "word": "having ",
+                      "start": 11.857223388671875,
+                      "end": 12.122375
+                    },
+                    {
+                      "word": "trouble ",
+                      "start": 11.910223388671875,
+                      "end": 12.175375
+                    },
+                    {
+                      "word": "with?",
+                      "start": 11.910223388671875,
+                      "end": 12.175375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 1
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Oven.",
+                  "words": [
+                    {
+                      "word": "Oven.",
+                      "start": 13.027,
+                      "end": 13.507
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "Got it, an oven. When would you prefer a technician to come by?",
+                  "words": [
+                    {
+                      "word": "Got ",
+                      "start": 14.998,
+                      "end": 15.263151611328125
+                    },
+                    {
+                      "word": "it, ",
+                      "start": 15.263151611328125,
+                      "end": 15.528302978515624
+                    },
+                    {
+                      "word": "an ",
+                      "start": 15.528302978515624,
+                      "end": 15.79345458984375
+                    },
+                    {
+                      "word": "oven. ",
+                      "start": 15.79345458984375,
+                      "end": 16.05860595703125
+                    },
+                    {
+                      "word": "When ",
+                      "start": 16.05860595703125,
+                      "end": 16.323757568359376
+                    },
+                    {
+                      "word": "would ",
+                      "start": 16.323757568359376,
+                      "end": 16.5889091796875
+                    },
+                    {
+                      "word": "you ",
+                      "start": 16.5889091796875,
+                      "end": 16.854060546875
+                    },
+                    {
+                      "word": "prefer ",
+                      "start": 16.854060546875,
+                      "end": 17.119212158203126
+                    },
+                    {
+                      "word": "a ",
+                      "start": 17.119212158203126,
+                      "end": 17.384363525390626
+                    },
+                    {
+                      "word": "technician ",
+                      "start": 17.384363525390626,
+                      "end": 17.64951513671875
+                    },
+                    {
+                      "word": "to ",
+                      "start": 17.64951513671875,
+                      "end": 17.914666748046876
+                    },
+                    {
+                      "word": "come ",
+                      "start": 17.847306884765626,
+                      "end": 18.112458251953125
+                    },
+                    {
+                      "word": "by?",
+                      "start": 17.847306884765626,
+                      "end": 18.112458251953125
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 2
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Twelfth of Jan.",
+                  "words": [
+                    {
+                      "word": "Twelfth ",
+                      "start": 18.757,
+                      "end": 19.237000000000002
+                    },
+                    {
+                      "word": "of ",
+                      "start": 19.237000000000002,
+                      "end": 19.397000000000002
+                    },
+                    {
+                      "word": "Jan.",
+                      "start": 19.397000000000002,
+                      "end": 19.637
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "Alright, noted for the 12th of January. May I have your name, please?",
+                  "words": [
+                    {
+                      "word": "Alright, ",
+                      "start": 20.605708251953125,
+                      "end": 20.87085986328125
+                    },
+                    {
+                      "word": "noted ",
+                      "start": 20.87085986328125,
+                      "end": 21.136011474609376
+                    },
+                    {
+                      "word": "for ",
+                      "start": 21.136011474609376,
+                      "end": 21.401162841796875
+                    },
+                    {
+                      "word": "the ",
+                      "start": 21.401162841796875,
+                      "end": 21.666314453125
+                    },
+                    {
+                      "word": "12th ",
+                      "start": 21.666314453125,
+                      "end": 21.9314658203125
+                    },
+                    {
+                      "word": "of ",
+                      "start": 21.9314658203125,
+                      "end": 22.196617431640625
+                    },
+                    {
+                      "word": "January. ",
+                      "start": 22.196617431640625,
+                      "end": 22.46176904296875
+                    },
+                    {
+                      "word": "May ",
+                      "start": 22.46176904296875,
+                      "end": 22.72692041015625
+                    },
+                    {
+                      "word": "I ",
+                      "start": 22.72692041015625,
+                      "end": 22.992072021484375
+                    },
+                    {
+                      "word": "have ",
+                      "start": 22.992072021484375,
+                      "end": 23.257223388671875
+                    },
+                    {
+                      "word": "your ",
+                      "start": 23.257223388671875,
+                      "end": 23.522375
+                    },
+                    {
+                      "word": "name, ",
+                      "start": 23.420348388671876,
+                      "end": 23.6855
+                    },
+                    {
+                      "word": "please?",
+                      "start": 23.420348388671876,
+                      "end": 23.6855
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 3
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "(inaudible speech)",
+                  "words": [
+                    {
+                      "word": "",
+                      "start": 25.207000500000003,
+                      "end": 25.207000500000003
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "And what's the best number to reach you at?",
+                  "words": [
+                    {
+                      "word": "And ",
+                      "start": 26.846,
+                      "end": 27.111151611328125
+                    },
+                    {
+                      "word": "what's ",
+                      "start": 27.111151611328125,
+                      "end": 27.376302978515625
+                    },
+                    {
+                      "word": "the ",
+                      "start": 27.376302978515625,
+                      "end": 27.64145458984375
+                    },
+                    {
+                      "word": "best ",
+                      "start": 27.64145458984375,
+                      "end": 27.90660595703125
+                    },
+                    {
+                      "word": "number ",
+                      "start": 27.90660595703125,
+                      "end": 28.171757568359375
+                    },
+                    {
+                      "word": "to ",
+                      "start": 28.171757568359375,
+                      "end": 28.4369091796875
+                    },
+                    {
+                      "word": "reach ",
+                      "start": 28.247806884765627,
+                      "end": 28.512958251953126
+                    },
+                    {
+                      "word": "you ",
+                      "start": 28.247806884765627,
+                      "end": 28.512958251953126
+                    },
+                    {
+                      "word": "at?",
+                      "start": 28.247806884765627,
+                      "end": 28.512958251953126
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 4
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Nine zero nine two one six eight seven four.",
+                  "words": [
+                    {
+                      "word": "Nine ",
+                      "start": 29.186998000000003,
+                      "end": 29.427000000000003
+                    },
+                    {
+                      "word": "zero ",
+                      "start": 29.427000000000003,
+                      "end": 29.667
+                    },
+                    {
+                      "word": "nine ",
+                      "start": 29.667,
+                      "end": 29.907
+                    },
+                    {
+                      "word": "two ",
+                      "start": 29.907,
+                      "end": 30.227
+                    },
+                    {
+                      "word": "one ",
+                      "start": 30.227,
+                      "end": 30.387
+                    },
+                    {
+                      "word": "six ",
+                      "start": 30.387,
+                      "end": 30.626999
+                    },
+                    {
+                      "word": "eight ",
+                      "start": 30.626999,
+                      "end": 30.866999
+                    },
+                    {
+                      "word": "seven ",
+                      "start": 30.866999,
+                      "end": 31.106998
+                    },
+                    {
+                      "word": "four.",
+                      "start": 31.106998,
+                      "end": 31.266998
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "Thank you! Let me confirm the details. You’re requesting service for an oven, and you’d prefer the technician to come on the 12th of January. The phone number I have is 909-216-8742. Could you please confirm your name for me?",
+                  "words": [
+                    {
+                      "word": "Thank ",
+                      "start": 35.285,
+                      "end": 35.550151611328126
+                    },
+                    {
+                      "word": "you! ",
+                      "start": 35.550151611328126,
+                      "end": 35.815302978515625
+                    },
+                    {
+                      "word": "Let ",
+                      "start": 35.815302978515625,
+                      "end": 36.08045458984375
+                    },
+                    {
+                      "word": "me ",
+                      "start": 36.08045458984375,
+                      "end": 36.34560595703125
+                    },
+                    {
+                      "word": "confirm ",
+                      "start": 36.34560595703125,
+                      "end": 36.610757568359375
+                    },
+                    {
+                      "word": "the ",
+                      "start": 36.610757568359375,
+                      "end": 36.8759091796875
+                    },
+                    {
+                      "word": "details. ",
+                      "start": 36.8759091796875,
+                      "end": 37.141060546875
+                    },
+                    {
+                      "word": "You’re ",
+                      "start": 37.141060546875,
+                      "end": 37.406212158203125
+                    },
+                    {
+                      "word": "requesting ",
+                      "start": 37.406212158203125,
+                      "end": 37.671363525390625
+                    },
+                    {
+                      "word": "service ",
+                      "start": 37.671363525390625,
+                      "end": 37.93651513671875
+                    },
+                    {
+                      "word": "for ",
+                      "start": 37.93651513671875,
+                      "end": 38.201666748046875
+                    },
+                    {
+                      "word": "an ",
+                      "start": 38.201666748046875,
+                      "end": 38.466818115234375
+                    },
+                    {
+                      "word": "oven, ",
+                      "start": 38.466818115234375,
+                      "end": 38.7319697265625
+                    },
+                    {
+                      "word": "and ",
+                      "start": 38.7319697265625,
+                      "end": 38.99712109375
+                    },
+                    {
+                      "word": "you’d ",
+                      "start": 38.99712109375,
+                      "end": 39.262272705078125
+                    },
+                    {
+                      "word": "prefer ",
+                      "start": 39.262272705078125,
+                      "end": 39.52742431640625
+                    },
+                    {
+                      "word": "the ",
+                      "start": 39.52742431640625,
+                      "end": 39.79257568359375
+                    },
+                    {
+                      "word": "technician ",
+                      "start": 39.79257568359375,
+                      "end": 40.057727294921875
+                    },
+                    {
+                      "word": "to ",
+                      "start": 40.057727294921875,
+                      "end": 40.32287890625
+                    },
+                    {
+                      "word": "come ",
+                      "start": 40.32287890625,
+                      "end": 40.5880302734375
+                    },
+                    {
+                      "word": "on ",
+                      "start": 40.5880302734375,
+                      "end": 40.853181884765625
+                    },
+                    {
+                      "word": "the ",
+                      "start": 40.853181884765625,
+                      "end": 41.118333251953125
+                    },
+                    {
+                      "word": "12th ",
+                      "start": 41.118333251953125,
+                      "end": 41.38348486328125
+                    },
+                    {
+                      "word": "of ",
+                      "start": 41.38348486328125,
+                      "end": 41.648636474609376
+                    },
+                    {
+                      "word": "January. ",
+                      "start": 41.648636474609376,
+                      "end": 41.913787841796875
+                    },
+                    {
+                      "word": "The ",
+                      "start": 41.913787841796875,
+                      "end": 42.178939453125
+                    },
+                    {
+                      "word": "phone ",
+                      "start": 42.178939453125,
+                      "end": 42.4440908203125
+                    },
+                    {
+                      "word": "number ",
+                      "start": 42.4440908203125,
+                      "end": 42.709242431640625
+                    },
+                    {
+                      "word": "I ",
+                      "start": 42.709242431640625,
+                      "end": 42.97439404296875
+                    },
+                    {
+                      "word": "have ",
+                      "start": 42.97439404296875,
+                      "end": 43.23954541015625
+                    },
+                    {
+                      "word": "is ",
+                      "start": 43.23954541015625,
+                      "end": 43.504697021484375
+                    },
+                    {
+                      "word": "909-216-8742.",
+                      "start": 43.504697021484375,
+                      "end": 43.769848388671875
+                    },
+                    {
+                      "word": " Could ",
+                      "start": 43.769848388671875,
+                      "end": 44.035
+                    },
+                    {
+                      "word": "you ",
+                      "start": 44.035,
+                      "end": 44.300151611328126
+                    },
+                    {
+                      "word": "please ",
+                      "start": 44.300151611328126,
+                      "end": 44.565302978515625
+                    },
+                    {
+                      "word": "confirm ",
+                      "start": 44.565302978515625,
+                      "end": 44.83045458984375
+                    },
+                    {
+                      "word": "your",
+                      "start": 44.83045458984375,
+                      "end": 45.09560595703125
+                    },
+                    {
+                      "word": " name ",
+                      "start": 45.09560595703125,
+                      "end": 45.360757568359375
+                    },
+                    {
+                      "word": "for ",
+                      "start": 45.360757568359375,
+                      "end": 45.6259091796875
+                    },
+                    {
+                      "word": "me?",
+                      "start": 45.6259091796875,
+                      "end": 45.891060546875
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 5
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Two and",
+                  "words": [
+                    {
+                      "word": "Two ",
+                      "start": 49.067,
+                      "end": 49.307002999999995
+                    },
+                    {
+                      "word": "and",
+                      "start": 49.307002999999995,
+                      "end": 49.467003
+                    }
+                  ]
+                }
+              ],
+              "transcript_with_tool_calls": [
+                {
+                  "role": "agent",
+                  "content": "Hi, thanks for calling our appliance repair service. This is Alex—how can I help you today?",
+                  "words": [
+                    {
+                      "word": "Hi, ",
+                      "start": 0.417708251953125,
+                      "end": 0.68285986328125
+                    },
+                    {
+                      "word": "thanks ",
+                      "start": 0.68285986328125,
+                      "end": 0.948011474609375
+                    },
+                    {
+                      "word": "for ",
+                      "start": 0.948011474609375,
+                      "end": 1.213162841796875
+                    },
+                    {
+                      "word": "calling ",
+                      "start": 1.213162841796875,
+                      "end": 1.478314453125
+                    },
+                    {
+                      "word": "our ",
+                      "start": 1.478314453125,
+                      "end": 1.7434658203125
+                    },
+                    {
+                      "word": "appliance ",
+                      "start": 1.7434658203125,
+                      "end": 2.008617431640625
+                    },
+                    {
+                      "word": "repair ",
+                      "start": 2.008617431640625,
+                      "end": 2.27376904296875
+                    },
+                    {
+                      "word": "service. ",
+                      "start": 2.27376904296875,
+                      "end": 2.53892041015625
+                    },
+                    {
+                      "word": "This ",
+                      "start": 2.53892041015625,
+                      "end": 2.804072021484375
+                    },
+                    {
+                      "word": "is ",
+                      "start": 2.804072021484375,
+                      "end": 3.069223388671875
+                    },
+                    {
+                      "word": "Alex—how ",
+                      "start": 3.069223388671875,
+                      "end": 3.334375
+                    },
+                    {
+                      "word": "can ",
+                      "start": 3.334375,
+                      "end": 3.599526611328125
+                    },
+                    {
+                      "word": "I ",
+                      "start": 3.599526611328125,
+                      "end": 3.864677978515625
+                    },
+                    {
+                      "word": "help ",
+                      "start": 3.864677978515625,
+                      "end": 4.12982958984375
+                    },
+                    {
+                      "word": "you ",
+                      "start": 4.12982958984375,
+                      "end": 4.39498095703125
+                    },
+                    {
+                      "word": "today?",
+                      "start": 4.39498095703125,
+                      "end": 4.660132568359375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 0
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "For an appointment",
+                  "words": [
+                    {
+                      "word": "For ",
+                      "start": 6.776999999999999,
+                      "end": 7.0969999999999995
+                    },
+                    {
+                      "word": "an ",
+                      "start": 7.0969999999999995,
+                      "end": 7.257
+                    },
+                    {
+                      "word": "appointment",
+                      "start": 7.257,
+                      "end": 7.737
+                    }
+                  ]
+                },
+                {
+                  "role": "tool_call_invocation",
+                  "tool_call_id": "call_VUhsEXrf7VtoJNQp",
+                  "name": "transition_to_Appointment_Booking",
+                  "arguments": "{}",
+                  "time_sec": 8.747,
+                  "type": "transition_to_Appointment_Booking"
+                },
+                {
+                  "role": "agent",
+                  "content": "Sure, I can help with that. What appliance are you having trouble with?",
+                  "words": [
+                    {
+                      "word": "Sure, ",
+                      "start": 9.205708251953125,
+                      "end": 9.47085986328125
+                    },
+                    {
+                      "word": "I ",
+                      "start": 9.47085986328125,
+                      "end": 9.736011474609375
+                    },
+                    {
+                      "word": "can ",
+                      "start": 9.736011474609375,
+                      "end": 10.001162841796875
+                    },
+                    {
+                      "word": "help ",
+                      "start": 10.001162841796875,
+                      "end": 10.266314453125
+                    },
+                    {
+                      "word": "with ",
+                      "start": 10.266314453125,
+                      "end": 10.5314658203125
+                    },
+                    {
+                      "word": "that. ",
+                      "start": 10.5314658203125,
+                      "end": 10.796617431640625
+                    },
+                    {
+                      "word": "What ",
+                      "start": 10.796617431640625,
+                      "end": 11.06176904296875
+                    },
+                    {
+                      "word": "appliance ",
+                      "start": 11.06176904296875,
+                      "end": 11.32692041015625
+                    },
+                    {
+                      "word": "are ",
+                      "start": 11.32692041015625,
+                      "end": 11.592072021484375
+                    },
+                    {
+                      "word": "you ",
+                      "start": 11.592072021484375,
+                      "end": 11.857223388671875
+                    },
+                    {
+                      "word": "having ",
+                      "start": 11.857223388671875,
+                      "end": 12.122375
+                    },
+                    {
+                      "word": "trouble ",
+                      "start": 11.910223388671875,
+                      "end": 12.175375
+                    },
+                    {
+                      "word": "with?",
+                      "start": 11.910223388671875,
+                      "end": 12.175375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 1
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Oven.",
+                  "words": [
+                    {
+                      "word": "Oven.",
+                      "start": 13.027,
+                      "end": 13.507
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "Got it, an oven. When would you prefer a technician to come by?",
+                  "words": [
+                    {
+                      "word": "Got ",
+                      "start": 14.998,
+                      "end": 15.263151611328125
+                    },
+                    {
+                      "word": "it, ",
+                      "start": 15.263151611328125,
+                      "end": 15.528302978515624
+                    },
+                    {
+                      "word": "an ",
+                      "start": 15.528302978515624,
+                      "end": 15.79345458984375
+                    },
+                    {
+                      "word": "oven. ",
+                      "start": 15.79345458984375,
+                      "end": 16.05860595703125
+                    },
+                    {
+                      "word": "When ",
+                      "start": 16.05860595703125,
+                      "end": 16.323757568359376
+                    },
+                    {
+                      "word": "would ",
+                      "start": 16.323757568359376,
+                      "end": 16.5889091796875
+                    },
+                    {
+                      "word": "you ",
+                      "start": 16.5889091796875,
+                      "end": 16.854060546875
+                    },
+                    {
+                      "word": "prefer ",
+                      "start": 16.854060546875,
+                      "end": 17.119212158203126
+                    },
+                    {
+                      "word": "a ",
+                      "start": 17.119212158203126,
+                      "end": 17.384363525390626
+                    },
+                    {
+                      "word": "technician ",
+                      "start": 17.384363525390626,
+                      "end": 17.64951513671875
+                    },
+                    {
+                      "word": "to ",
+                      "start": 17.64951513671875,
+                      "end": 17.914666748046876
+                    },
+                    {
+                      "word": "come ",
+                      "start": 17.847306884765626,
+                      "end": 18.112458251953125
+                    },
+                    {
+                      "word": "by?",
+                      "start": 17.847306884765626,
+                      "end": 18.112458251953125
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 2
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Twelfth of Jan.",
+                  "words": [
+                    {
+                      "word": "Twelfth ",
+                      "start": 18.757,
+                      "end": 19.237000000000002
+                    },
+                    {
+                      "word": "of ",
+                      "start": 19.237000000000002,
+                      "end": 19.397000000000002
+                    },
+                    {
+                      "word": "Jan.",
+                      "start": 19.397000000000002,
+                      "end": 19.637
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "Alright, noted for the 12th of January. May I have your name, please?",
+                  "words": [
+                    {
+                      "word": "Alright, ",
+                      "start": 20.605708251953125,
+                      "end": 20.87085986328125
+                    },
+                    {
+                      "word": "noted ",
+                      "start": 20.87085986328125,
+                      "end": 21.136011474609376
+                    },
+                    {
+                      "word": "for ",
+                      "start": 21.136011474609376,
+                      "end": 21.401162841796875
+                    },
+                    {
+                      "word": "the ",
+                      "start": 21.401162841796875,
+                      "end": 21.666314453125
+                    },
+                    {
+                      "word": "12th ",
+                      "start": 21.666314453125,
+                      "end": 21.9314658203125
+                    },
+                    {
+                      "word": "of ",
+                      "start": 21.9314658203125,
+                      "end": 22.196617431640625
+                    },
+                    {
+                      "word": "January. ",
+                      "start": 22.196617431640625,
+                      "end": 22.46176904296875
+                    },
+                    {
+                      "word": "May ",
+                      "start": 22.46176904296875,
+                      "end": 22.72692041015625
+                    },
+                    {
+                      "word": "I ",
+                      "start": 22.72692041015625,
+                      "end": 22.992072021484375
+                    },
+                    {
+                      "word": "have ",
+                      "start": 22.992072021484375,
+                      "end": 23.257223388671875
+                    },
+                    {
+                      "word": "your ",
+                      "start": 23.257223388671875,
+                      "end": 23.522375
+                    },
+                    {
+                      "word": "name, ",
+                      "start": 23.420348388671876,
+                      "end": 23.6855
+                    },
+                    {
+                      "word": "please?",
+                      "start": 23.420348388671876,
+                      "end": 23.6855
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 3
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "(inaudible speech)",
+                  "words": [
+                    {
+                      "word": "",
+                      "start": 25.207000500000003,
+                      "end": 25.207000500000003
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "And what's the best number to reach you at?",
+                  "words": [
+                    {
+                      "word": "And ",
+                      "start": 26.846,
+                      "end": 27.111151611328125
+                    },
+                    {
+                      "word": "what's ",
+                      "start": 27.111151611328125,
+                      "end": 27.376302978515625
+                    },
+                    {
+                      "word": "the ",
+                      "start": 27.376302978515625,
+                      "end": 27.64145458984375
+                    },
+                    {
+                      "word": "best ",
+                      "start": 27.64145458984375,
+                      "end": 27.90660595703125
+                    },
+                    {
+                      "word": "number ",
+                      "start": 27.90660595703125,
+                      "end": 28.171757568359375
+                    },
+                    {
+                      "word": "to ",
+                      "start": 28.171757568359375,
+                      "end": 28.4369091796875
+                    },
+                    {
+                      "word": "reach ",
+                      "start": 28.247806884765627,
+                      "end": 28.512958251953126
+                    },
+                    {
+                      "word": "you ",
+                      "start": 28.247806884765627,
+                      "end": 28.512958251953126
+                    },
+                    {
+                      "word": "at?",
+                      "start": 28.247806884765627,
+                      "end": 28.512958251953126
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 4
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Nine zero nine two one six eight seven four.",
+                  "words": [
+                    {
+                      "word": "Nine ",
+                      "start": 29.186998000000003,
+                      "end": 29.427000000000003
+                    },
+                    {
+                      "word": "zero ",
+                      "start": 29.427000000000003,
+                      "end": 29.667
+                    },
+                    {
+                      "word": "nine ",
+                      "start": 29.667,
+                      "end": 29.907
+                    },
+                    {
+                      "word": "two ",
+                      "start": 29.907,
+                      "end": 30.227
+                    },
+                    {
+                      "word": "one ",
+                      "start": 30.227,
+                      "end": 30.387
+                    },
+                    {
+                      "word": "six ",
+                      "start": 30.387,
+                      "end": 30.626999
+                    },
+                    {
+                      "word": "eight ",
+                      "start": 30.626999,
+                      "end": 30.866999
+                    },
+                    {
+                      "word": "seven ",
+                      "start": 30.866999,
+                      "end": 31.106998
+                    },
+                    {
+                      "word": "four.",
+                      "start": 31.106998,
+                      "end": 31.266998
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "Thank you! Let me confirm the details. You’re requesting service for an oven, and you’d prefer the technician to come on the 12th of January. The phone number I have is 909-216-8742. Could you please confirm your name for me?",
+                  "words": [
+                    {
+                      "word": "Thank ",
+                      "start": 35.285,
+                      "end": 35.550151611328126
+                    },
+                    {
+                      "word": "you! ",
+                      "start": 35.550151611328126,
+                      "end": 35.815302978515625
+                    },
+                    {
+                      "word": "Let ",
+                      "start": 35.815302978515625,
+                      "end": 36.08045458984375
+                    },
+                    {
+                      "word": "me ",
+                      "start": 36.08045458984375,
+                      "end": 36.34560595703125
+                    },
+                    {
+                      "word": "confirm ",
+                      "start": 36.34560595703125,
+                      "end": 36.610757568359375
+                    },
+                    {
+                      "word": "the ",
+                      "start": 36.610757568359375,
+                      "end": 36.8759091796875
+                    },
+                    {
+                      "word": "details. ",
+                      "start": 36.8759091796875,
+                      "end": 37.141060546875
+                    },
+                    {
+                      "word": "You’re ",
+                      "start": 37.141060546875,
+                      "end": 37.406212158203125
+                    },
+                    {
+                      "word": "requesting ",
+                      "start": 37.406212158203125,
+                      "end": 37.671363525390625
+                    },
+                    {
+                      "word": "service ",
+                      "start": 37.671363525390625,
+                      "end": 37.93651513671875
+                    },
+                    {
+                      "word": "for ",
+                      "start": 37.93651513671875,
+                      "end": 38.201666748046875
+                    },
+                    {
+                      "word": "an ",
+                      "start": 38.201666748046875,
+                      "end": 38.466818115234375
+                    },
+                    {
+                      "word": "oven, ",
+                      "start": 38.466818115234375,
+                      "end": 38.7319697265625
+                    },
+                    {
+                      "word": "and ",
+                      "start": 38.7319697265625,
+                      "end": 38.99712109375
+                    },
+                    {
+                      "word": "you’d ",
+                      "start": 38.99712109375,
+                      "end": 39.262272705078125
+                    },
+                    {
+                      "word": "prefer ",
+                      "start": 39.262272705078125,
+                      "end": 39.52742431640625
+                    },
+                    {
+                      "word": "the ",
+                      "start": 39.52742431640625,
+                      "end": 39.79257568359375
+                    },
+                    {
+                      "word": "technician ",
+                      "start": 39.79257568359375,
+                      "end": 40.057727294921875
+                    },
+                    {
+                      "word": "to ",
+                      "start": 40.057727294921875,
+                      "end": 40.32287890625
+                    },
+                    {
+                      "word": "come ",
+                      "start": 40.32287890625,
+                      "end": 40.5880302734375
+                    },
+                    {
+                      "word": "on ",
+                      "start": 40.5880302734375,
+                      "end": 40.853181884765625
+                    },
+                    {
+                      "word": "the ",
+                      "start": 40.853181884765625,
+                      "end": 41.118333251953125
+                    },
+                    {
+                      "word": "12th ",
+                      "start": 41.118333251953125,
+                      "end": 41.38348486328125
+                    },
+                    {
+                      "word": "of ",
+                      "start": 41.38348486328125,
+                      "end": 41.648636474609376
+                    },
+                    {
+                      "word": "January. ",
+                      "start": 41.648636474609376,
+                      "end": 41.913787841796875
+                    },
+                    {
+                      "word": "The ",
+                      "start": 41.913787841796875,
+                      "end": 42.178939453125
+                    },
+                    {
+                      "word": "phone ",
+                      "start": 42.178939453125,
+                      "end": 42.4440908203125
+                    },
+                    {
+                      "word": "number ",
+                      "start": 42.4440908203125,
+                      "end": 42.709242431640625
+                    },
+                    {
+                      "word": "I ",
+                      "start": 42.709242431640625,
+                      "end": 42.97439404296875
+                    },
+                    {
+                      "word": "have ",
+                      "start": 42.97439404296875,
+                      "end": 43.23954541015625
+                    },
+                    {
+                      "word": "is ",
+                      "start": 43.23954541015625,
+                      "end": 43.504697021484375
+                    },
+                    {
+                      "word": "909-216-8742.",
+                      "start": 43.504697021484375,
+                      "end": 43.769848388671875
+                    },
+                    {
+                      "word": " Could ",
+                      "start": 43.769848388671875,
+                      "end": 44.035
+                    },
+                    {
+                      "word": "you ",
+                      "start": 44.035,
+                      "end": 44.300151611328126
+                    },
+                    {
+                      "word": "please ",
+                      "start": 44.300151611328126,
+                      "end": 44.565302978515625
+                    },
+                    {
+                      "word": "confirm ",
+                      "start": 44.565302978515625,
+                      "end": 44.83045458984375
+                    },
+                    {
+                      "word": "your",
+                      "start": 44.83045458984375,
+                      "end": 45.09560595703125
+                    },
+                    {
+                      "word": " name ",
+                      "start": 45.09560595703125,
+                      "end": 45.360757568359375
+                    },
+                    {
+                      "word": "for ",
+                      "start": 45.360757568359375,
+                      "end": 45.6259091796875
+                    },
+                    {
+                      "word": "me?",
+                      "start": 45.6259091796875,
+                      "end": 45.891060546875
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 5
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Two and",
+                  "words": [
+                    {
+                      "word": "Two ",
+                      "start": 49.067,
+                      "end": 49.307002999999995
+                    },
+                    {
+                      "word": "and",
+                      "start": 49.307002999999995,
+                      "end": 49.467003
+                    }
+                  ]
+                },
+                {
+                  "role": "tool_call_invocation",
+                  "tool_call_id": "call_A4YGIzBkiPdzauqy",
+                  "name": "submit_lead_info",
+                  "arguments": "{\"name\":\"Stuart\",\"preferred_time\":\"12th of January\",\"appliance\":\"oven\",\"phone_number\":9092168742}",
+                  "time_sec": 53.26,
+                  "type": "custom"
+                }
+              ],
+              "latency": {},
+              "call_cost": {
+                "product_costs": [],
+                "total_duration_unit_price": 0,
+                "total_duration_seconds": 0,
+                "combined_cost": 0
+              },
+              "data_storage_setting": "everything",
+              "opt_in_signed_url": false,
+              "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6IndlYl9jYWxsX2ZhYTdhMjZlYTFkMzFlNzJhNjljMDc3ZGUyNyJ9LCJpc3MiOiJBUEl3UkNGdVBCYXdtMmgiLCJleHAiOjE3NjgxNDMwMzAsIm5iZiI6MCwic3ViIjoiY2xpZW50In0.R51Nl0KWRjuxGLoNJ1mi-Ph7cPC9wPRZUkRCHx4O8sE"
+            },
+            "name": "submit_lead_info",
+            "args": {
+              "name": "Stuart",
+              "preferred_time": "12th of January",
+              "appliance": "oven",
+              "phone_number": 9092168742
+            }
+          },
+          "webhookUrl": "http://localhost:5678/webhook-test/c701ecfa-76d9-42de-912f-e64f6f31e4f3",
+          "executionMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5961eefe-d350-4496-9f47-5dfff1f352ef",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ec37d409862604d0262f64ac0e0777474559d40693efe5bae32d4b688b0de829"
+  },
+  "id": "6Q9Dgug4r8lDlHhN",
+  "tags": []
+}
